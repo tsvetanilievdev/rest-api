@@ -1,12 +1,14 @@
 let list = [{ id: 1, name: 'item1', price: 222 }, { id: 2, name: 'shoes2', price: 333 }, { id: 3, name: 'tracksuit3', price: 111 }]
 
 const express = require('express');
+const cors = require('./src/middlewares/cors.js');
 
 const app = express();
 
 
 app.use('/static', express.static('static'));
 app.use(express.json());
+app.use(cors);
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'OK', list })
