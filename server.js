@@ -1,13 +1,17 @@
 const express = require('express');
-const cors = require('./src/middlewares/cors.js');
+
+const dbConfig = require('./config/dbConfig.js');
+const expressConfig = require('./config/expressConfig.js');
+const routerConfig = require('./config/routerConfig.js');
 
 const app = express();
 
-app.use('/static', express.static('static'));
-app.use(express.json());
-app.use(cors);
+async function start() {
+    await dbConfig(app);
+    expressConfig(app);
+    routerConfig(app);
 
-app.get('/data/catalog', (req, res) => {
-    res.json([]);
-})
-app.listen(3030, () => { console.log('Running on 3030...') })
+    app.listen(3030, () => { console.log('Running on 3030...') })
+}
+
+module.exports = start;
