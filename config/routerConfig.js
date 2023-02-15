@@ -1,14 +1,14 @@
 const authController = require('../controllers/authController.js');
 const dataController = require('../controllers/dataController.js');
 
-const router = require('express').Router();
+const configRouter = require('express').Router();
 
-router.use('/users', authController);
-router.use('/data', dataController);
+configRouter.use('/users', authController);
+configRouter.use('/data', dataController);
 
-router.get('*', (req, res) => {
+configRouter.get('*', (req, res) => {
     res.status(404);
     res.json({ message: 'Page Not Found' });
 })
 
-module.exports = (app) => app.use(router);
+module.exports = (app) => app.use(configRouter);
