@@ -40,4 +40,8 @@ app.delete('/:id', (req, res) => {
     list = list.filter(x => x.id != req.params.id);
     res.status(202).end();
 })
-app.listen(3000, () => { console.log('Running on 3000...') })
+
+app.get('/data/catalog', (req, res) => {
+    res.json([]);
+})
+app.listen(3030, () => { console.log('Running on 3030...') })
