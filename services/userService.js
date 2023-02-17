@@ -53,12 +53,15 @@ function createToken(user) {
 function parseToken(token) {
     //TODO scan blacklist for token
     if (tokenBlackList.has(token)) {
-        throw new Error('Session expired! Please Sign In!')
+        throw new Error('Session expired! Please Sign In!');
     }
+
+    return jwt.verify(token, secretJWT);
 }
 
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    parseToken
 }
