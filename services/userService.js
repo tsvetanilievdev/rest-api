@@ -23,7 +23,20 @@ async function register(email, password) {
     }
 }
 async function login(email, password) {
+    const existingUser = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
+    if (!existingUser) {
+        throw new Error('Incorrect credentials!');
+    }
 
+    const isSamePassword = await bcrypt.compare(password, existingUser.hashedPass);
+    if (!isSamePassword) {
+        throw new Error('Incorrect credentials!');
+    }
+    return {
+        _id: existingUser._id,
+        email: existingUser.email,
+        accessToken: createToken(existingUser)
+    }
 }
 async function logout() {
 
