@@ -1,15 +1,19 @@
 const Item = require('../models/Item.js');
 
-async function getAll() {
+async function getAll(_ownerId) {
+    if (_ownerId) {
+        return Item.find({ _ownerId }).lean().exec();
+
+    }
     return Item.find({}).lean().exec();
 }
 
 async function getById(id) {
-    return Item.findById(id).lean().exec();
+    return Item.findById(id).exec();
 }
 
 async function getMyShoes(_ownerId) {
-    return Item.find(_ownerId).lean().exec();
+    return Item.find({ _ownerId }).lean().exec();
 }
 
 async function create(item) {
@@ -27,7 +31,7 @@ async function updateById(id, item) {
     existing.material = item.material;
     existing.img = item.img;
 
-    await existing.save()
+    await existing.save();
 
     return existing;
 }

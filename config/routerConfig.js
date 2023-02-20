@@ -4,7 +4,7 @@ const dataController = require('../controllers/dataController.js');
 const configRouter = require('express').Router();
 
 configRouter.use('/users', authController);
-configRouter.use('/data', dataController);
+configRouter.use('/data/catalog', dataController);
 
 configRouter.get('*', (req, res) => {
     res.status(404);
