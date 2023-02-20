@@ -7,4 +7,8 @@ dataController
         console.log(req.token);
         res.json([]);
     })
+    .post((req, res) => {
+        console.log(req.body);
+        res.end()
+    })
 module.exports = dataController;
