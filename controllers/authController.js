@@ -35,7 +35,6 @@ authController.post('/login', async (req, res) => {
 
 authController.get('/logout', async (req, res) => {
     const token = req.token;
-    console.log('LOGOUT >>>>>>>>>>>>>>.', token)
     try {
         await logout(token);
         res.status(204).end();
